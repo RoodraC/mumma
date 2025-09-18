@@ -34,6 +34,40 @@
       position:relative;
       z-index:5;
     }
+    /* Force proper mobile responsiveness */
+@media (max-width: 480px) {
+  .wrap {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
+  }
+  .stage,
+  .console {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+  }
+  .info-box {
+    padding: 1rem;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .mirror {
+    position: static;
+    margin: 1rem auto 0 auto;
+    width: 90% !important;
+    height: auto;
+  }
+  canvas.layer {
+    max-width: 100%;
+  }
+}
+
     @media (max-width:900px) {
       .wrap { flex-direction: column; max-width: 98vw; gap:2vw; padding:2vw;}
     }
@@ -360,3 +394,4 @@
   </script>
 </body>
 </html>
+
