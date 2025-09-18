@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — For Mom</title>
+  <style>
+    :root{
+      --bg:#f6f7f9; --panel:#ffffff; --accent:#2b7a78; --accent2:#ff5f7e; --warm:#f2b880;
+      --text:#102a43; font-family:Georgia, 'Times New Roman', serif;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#f6f7f9,#eef3f7);color:var(--text);overflow:hidden}
+    .wrap{max-width:1100px;margin:28px auto;display:grid;grid-template-columns:1fr 360px;gap:22px;padding:18px;position:relative;z-index:5}
+    header{grid-column:1/-1;display:flex;align-items:center;gap:14px}
+    h1{margin:0;font-size:2.2rem;font-weight:700;letter-spacing:1px;color:var(--accent)}
+    p.lead{margin:0;color:#445566;font-size:1rem;font-style:italic}
+    /* left panel */
+    .stage{position:relative;border-radius:16px;padding:24px;background:var(--panel);box-shadow:0 10px 28px rgba(16,42,67,0.08);overflow:hidden}
+    canvas.layer{position:absolute;inset:0;pointer-events:none}
+    .center-card{position:relative;z-index:6;padding:16px;text-align:center}
+    .info-box{background:rgba(255,255,255,0.8);backdrop-filter:blur(4px);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.05);color:#234;max-width:760px;margin:0 auto}
+    .info-box h3{margin:0 0 10px 0;font-family:serif;font-size:1.3rem;color:var(--accent2)}
+    .info-box p{margin:0;color:#3a5568;line-height:1.5}
+    /* right console */
+    .console{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));border-radius:12px;padding:16px;box-shadow:inset 0 -6px 20px rgba(2,6,23,0.05);display:flex;flex-direction:column;gap:20px;}
+    .controls{display:flex;flex-direction:column;gap:12px}
+    button.btn{background:var(--accent2);border:none;padding:12px;border-radius:10px;color:white;font-weight:700;cursor:pointer;transition:transform 0.2s}
+    button.btn:hover{transform:scale(1.05)}
+    button.btn.secondary{background:transparent;border:1px solid rgba(16,42,67,0.1);color:var(--accent)}
+    label.small{display:flex;gap:8px;align-items:center;color:#617d98;font-size:13px}
+    .book-ornament{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, #ddd);display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 30px rgba(16,42,67,0.08);transition:transform 0.4s}
+    .book-ornament:hover{transform:rotate(10deg) scale(1.1)}
+    /* floating book emojis */
+    .book{position:absolute;font-size:24px;opacity:0.8;animation:floatBook linear infinite}
+    @keyframes floatBook{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-120vh) rotate(360deg);}}
+    /* funny mirror */
+    .mirror{position:absolute;bottom:20px;right:20px;width:200px;height:240px;border:4px solid #aaa;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);background:#000;display:flex;flex-direction:column;align-items:center;}
+    .mirror canvas{flex:1;width:100%;height:auto;}
+    .mirror button{background:var(--accent);color:#fff;border:none;padding:6px 10px;margin:4px;border-radius:6px;cursor:pointer;font-size:12px}
+    .mirror button:hover{background:var(--accent2)}
+    @media (max-width:880px){.wrap{grid-template-columns:1fr;padding:6px;gap:8px}.console{order:2; max-width: 98vw;}}
+    @media (max-width:420px){h1{font-size:1.3rem}.wrap{padding:0}.stage{padding:10px}.book-ornament{width:40px;height:40px;font-size:20px}}
+    /* SEARCH FORM */
+    .search-panel{background:rgba(255,255,255,0.9); border-radius:10px; box-shadow:0 2px 8px rgba(16,42,67,0.06); padding:12px; margin-bottom:5px; display:flex; flex-direction:column; gap:7px;}
+    .search-panel input[type="text"]{width:100%;padding:8px;font-size:1.1em;border-radius:7px; border:1px solid #cdd4db;}
+    .search-panel input:focus{outline:2px solid var(--accent2);}
+    .search-panel button{margin-top:5px;padding:10px; font-size:1.08em; border-radius:8px; background:var(--accent2); color:#fff; border:none; font-weight:700; cursor:pointer;}
+    .search-panel button:hover{background:#e94a66;}
+    .search-panel label{font-size:1em;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="display:flex;flex-direction:column">
+        <h1>Happy Birthday, Mumma</h1>
+        <p class="lead">I love you sooooooooooooooo much and always will!!!</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
+        <div class="book-ornament">📚</div>
+      </div>
+    </header>
+    <main class="stage" id="stage">
+      <canvas id="bubbles" class="layer"></canvas>
+      <canvas id="particles" class="layer"></canvas>
+      <canvas id="fireworks" class="layer"></canvas>
+      <div class="center-card">
+        <div class="info-box">
+          <h3>For Mom</h3>
+          <p>
+            Dear Mummish Mumma. I don't know what to say, you already know that we love you tons and we will no matter what, here's a poem I wrote for you:<br>
+            Mom’s gentle hands, a guiding light,<br>
+            Through darkest storms, she makes things right.<br>
+            Her love’s a song, so calm, so true,<br>
+            A steady flame that carries you..<br>
+            Happy Birthday. — With love, always.
+          </p>
+        </div>
+      </div>
+    </main>
+    <aside class="console" role="region" aria-label="Console">
+      <h3 style="margin:0 0 8px 0;color:var(--accent); font-size:1.14em;">Controls</h3>
+      <div class="search-panel">
+        <label>Find a Bangla Audiobook:</label>
+        <form id="extsearch" onsubmit="goSearch(this); return false;">
+          <input type="text" name="title" placeholder="Title" autocomplete="off" />
+          <input type="text" name="author" placeholder="Author" autocomplete="off" />
+          <input type="text" name="narrator" placeholder="Narrator" autocomplete="off" />
+          <input type="text" name="genre" placeholder="Genre" autocomplete="off" />
+          <button type="submit">Search Audiobooks</button>
+        </form>
+      </div>
+         </aside>
+      </div>
+  <div class="mirror" id="mirror">
+    <canvas id="mirrorCanvas"></canvas>
+    <button id="toggleEffect">Change Effect</button>
+  </div>
+  <canvas id="confettiCanvas" class="layer"></canvas>
+  <script>
+    // SEARCH PANEL LOGIC (no backend required)
+    function goSearch(form) {
+      const title = encodeURIComponent(form.title.value || '');
+      const author = encodeURIComponent(form.author.value || '');
+      const narrator = encodeURIComponent(form.narrator.value || '');
+      const genre = encodeURIComponent(form.genre.value || '');
+      let terms = [title, author, narrator, genre].filter(Boolean).join('+');
+      window.open('https://banglaaudiobook.in/?s=' + terms, '_blank');
+    }
+
+    // floating book emojis (visual effect)
+    function spawnBook(){
+      const b=document.createElement('div');
+      b.className='book';
+      b.textContent='📖';
+      b.style.left=Math.random()*100+'vw';
+      b.style.animationDuration=(8+Math.random()*6)+'s';
+      document.body.appendChild(b);
+      setTimeout(()=>b.remove(),15000);
+    }
+    setInterval(spawnBook,2000);
+
+    // funny mirror using webcam with many effects
+    const mirrorCanvas=document.getElementById('mirrorCanvas');
+    const ctx=mirrorCanvas.getContext('2d');
+    const video=document.createElement('video');
+    video.autoplay=true;
+    video.muted=true;
+    video.playsInline=true;
+    let effectIndex=0;
+    const effects=[
+      function wave(){
+        for(let y=0;y<video.videoHeight;y+=10){
+          ctx.drawImage(video,0,y,video.videoWidth,10,Math.sin(y/20)*20,y,video.videoWidth,10);
+        }
+      },
+      function stretch(){
+        ctx.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width,mirrorCanvas.height*1.5);
+      },
+      function squish(){
+        ctx.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width*0.5,mirrorCanvas.height);
+      },
+      function flip(){
+        ctx.save();
+        ctx.scale(-1,1);
+        ctx.drawImage(video,-mirrorCanvas.width,0,mirrorCanvas.width,mirrorCanvas.height);
+        ctx.restore();
+      },
+      function pixelate(){
+        const size=10;
+        const temp=document.createElement('canvas');
+        temp.width=video.videoWidth/size;
+        temp.height=video.videoHeight/size;
+        const tctx=temp.getContext('2d');
+        tctx.drawImage(video,0,0,temp.width,temp.height);
+        ctx.imageSmoothingEnabled=false;
+        ctx.drawImage(temp,0,0,temp.width,temp.height,0,0,mirrorCanvas.width,mirrorCanvas.height);
+        ctx.imageSmoothingEnabled=true;
+      }
+    ];
+    function drawFunny(){
+      if(video.readyState===video.HAVE_ENOUGH_DATA){
+        mirrorCanvas.width=video.videoWidth;
+        mirrorCanvas.height=video.videoHeight;
+        ctx.clearRect(0,0,mirrorCanvas.width,mirrorCanvas.height);
+        effects[effectIndex % effects.length]();
+      }
+      requestAnimationFrame(drawFunny);
+    }
+    if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
+      navigator.mediaDevices.getUserMedia({video:true}).then(stream=>{
+        video.srcObject=stream;
+        video.play();
+        drawFunny();
+      });
+    }
+    document.getElementById('toggleEffect').addEventListener('click',()=>{
+      effectIndex=(effectIndex+1)%100;
+    });
+  </script>
+</body>
+</html>
