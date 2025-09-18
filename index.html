@@ -6,47 +6,121 @@
   <title>Happy Birthday — For Mom</title>
   <style>
     :root{
-      --bg:#f6f7f9; --panel:#ffffff; --accent:#2b7a78; --accent2:#ff5f7e; --warm:#f2b880;
-      --text:#102a43; font-family:Georgia, 'Times New Roman', serif;
+      --bg1: #fbeaff;
+      --bg2: #f7c6ff;
+      --panel:#fff;
+      --accent:#b65fcf;
+      --accent2:#ff5f7e;
+      --warm:#ffcce3;
+      --text:#3a0a43;
+      font-family: system-ui, 'Segoe UI', Arial, sans-serif
     }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#f6f7f9,#eef3f7);color:var(--text);overflow:hidden}
-    .wrap{max-width:1100px;margin:28px auto;display:grid;grid-template-columns:1fr 360px;gap:22px;padding:18px;position:relative;z-index:5}
-    header{grid-column:1/-1;display:flex;align-items:center;gap:14px}
-    h1{margin:0;font-size:2.2rem;font-weight:700;letter-spacing:1px;color:var(--accent)}
-    p.lead{margin:0;color:#445566;font-size:1rem;font-style:italic}
-    /* left panel */
-    .stage{position:relative;border-radius:16px;padding:24px;background:var(--panel);box-shadow:0 10px 28px rgba(16,42,67,0.08);overflow:hidden}
-    canvas.layer{position:absolute;inset:0;pointer-events:none}
-    .center-card{position:relative;z-index:6;padding:16px;text-align:center}
-    .info-box{background:rgba(255,255,255,0.8);backdrop-filter:blur(4px);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.05);color:#234;max-width:760px;margin:0 auto}
-    .info-box h3{margin:0 0 10px 0;font-family:serif;font-size:1.3rem;color:var(--accent2)}
-    .info-box p{margin:0;color:#3a5568;line-height:1.5}
-    /* right console */
-    .console{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));border-radius:12px;padding:16px;box-shadow:inset 0 -6px 20px rgba(2,6,23,0.05);display:flex;flex-direction:column;gap:20px;}
+    html, body {
+      height:100%; margin:0; padding:0;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+      color:var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+    .wrap {
+      max-width:1100px;
+      margin:4vw auto;
+      padding:2vw;
+      display: flex;
+      gap:3vw;
+      justify-content: center;
+      align-items: flex-start;
+      position:relative;
+      z-index:5;
+    }
+    @media (max-width:900px) {
+      .wrap { flex-direction: column; max-width: 98vw; gap:2vw; padding:2vw;}
+    }
+    @media (max-width:650px) {
+      .wrap { flex-direction: column; max-width: 99vw; gap:1vw; padding:1vw;}
+    }
+    header {
+      width:100%;
+      display:flex; align-items:center; gap:12px; margin-bottom:2vw;
+    }
+    h1 {
+      margin:0;font-size:clamp(1.2rem, 7vw, 2.2rem);font-weight:700;letter-spacing:1px;color:var(--accent)
+    }
+    p.lead {
+      margin:0;color:#884889; font-size:clamp(0.95rem, 3vw, 1.1rem); font-style:italic
+    }
+    .stage {
+      flex:3 1 300px;
+      min-width:0;
+      background:var(--panel);
+      border-radius:clamp(8px,2vw,16px);
+      padding:clamp(10px,5vw,32px);
+      box-shadow:0 2px 18px 0 #d6adf7bf;
+      margin-bottom:2vw;
+      position:relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .center-card { width: 100%; z-index:6;text-align: center;}
+    .info-box {
+      background:rgba(255,255,255,0.93);
+      backdrop-filter:blur(3px);
+      border-radius:clamp(8px,1vw,14px);
+      box-shadow:0 2px 8px #eabfff29;
+      color:#5d146a;
+      max-width:99vw;
+      margin:0 auto
+    }
+    .info-box h3{margin:0 0 10px 0;font-family:serif;font-size:clamp(1.1rem,4vw,1.3rem);color:var(--accent2)}
+    .info-box p{margin:0;color:#73347b;line-height:1.6; font-size:clamp(1rem,3vw,1.09rem);}
+    .console {
+      flex:1 1 380px;
+      min-width: 0;
+      border-radius:clamp(8px,1vw,13px);
+      padding:clamp(10px,4vw,16px);
+      background: linear-gradient(180deg, #fff7fbcc, #f1e1f6cc);
+      box-shadow:inset 0 -6px 18px #eeb4f466;
+      margin-bottom:2vw;
+      display: flex; flex-direction: column; gap:2vw;
+      align-items: stretch; 
+      max-width: 410px;
+    }
+    @media (max-width:900px) {.stage, .console {max-width: 99vw; margin:0 auto 2vw auto;}}
+    @media (max-width:540px) {
+      .stage, .console {padding:4vw;}
+      .center-card, .info-box{padding:2vw;}
+    }
+    .search-panel{
+      background:rgba(255,255,255,0.98);border-radius:8px;box-shadow:0 2px 8px #cf4dae16;padding:10px 8px;margin-bottom:6px;display:flex;flex-direction:column;gap:7px;
+    }
+    .search-panel label{font-size:clamp(1.01rem,4vw,1.13rem);color:#8d29a7;font-weight:600;}
+    .search-panel input[type="text"], .search-panel button{
+      width:100%;padding:10px;font-size:clamp(1rem,3.7vw,1.14rem);border-radius:7px;border:1px solid #e6c7ed; box-sizing: border-box;
+      margin-bottom:0.5vw;
+      margin-top:1.5vw;
+    }
+    .search-panel input:focus{outline:2px solid var(--accent2);}
+    .search-panel button{padding:12px;font-weight:700;background:var(--accent2);color:#fff;border:none;cursor:pointer;}
+    .search-panel button:hover{background:#e94a66;}
     .controls{display:flex;flex-direction:column;gap:12px}
     button.btn{background:var(--accent2);border:none;padding:12px;border-radius:10px;color:white;font-weight:700;cursor:pointer;transition:transform 0.2s}
     button.btn:hover{transform:scale(1.05)}
-    button.btn.secondary{background:transparent;border:1px solid rgba(16,42,67,0.1);color:var(--accent)}
-    label.small{display:flex;gap:8px;align-items:center;color:#617d98;font-size:13px}
-    .book-ornament{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, #ddd);display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 30px rgba(16,42,67,0.08);transition:transform 0.4s}
+    button.btn.secondary{background:transparent;border:1px solid #c88ce5;color:var(--accent)}
+    label.small{display:flex;gap:8px;align-items:center;color:#8f47b7;font-size:clamp(0.98rem,3vw,1rem)}
+    .book-ornament{width:clamp(36px,10vw,70px);height:clamp(36px,10vw,70px);border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff,#eee);display:flex;align-items:center;justify-content:center;font-size:clamp(1.3rem,4vw,2rem);box-shadow:0 8px 30px #bd44c422;transition:transform 0.4s}
     .book-ornament:hover{transform:rotate(10deg) scale(1.1)}
-    /* floating book emojis */
-    .book{position:absolute;font-size:24px;opacity:0.8;animation:floatBook linear infinite}
+    .book{position:absolute;font-size:clamp(1rem,5vw,2rem);opacity:0.7;animation:floatBook linear infinite}
     @keyframes floatBook{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-120vh) rotate(360deg);}}
-    /* funny mirror */
-    .mirror{position:absolute;bottom:20px;right:20px;width:200px;height:240px;border:4px solid #aaa;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);background:#000;display:flex;flex-direction:column;align-items:center;}
+    .mirror{position:absolute;bottom:20px;right:20px;width:clamp(105px,33vw,200px);height:clamp(90px,28vw,240px);border:3px solid #e8a8e4;border-radius:13px;overflow:hidden;box-shadow:0 4px 16px #eabfff2b;background:#000;display:flex;flex-direction:column;align-items:center;}
     .mirror canvas{flex:1;width:100%;height:auto;}
     .mirror button{background:var(--accent);color:#fff;border:none;padding:6px 10px;margin:4px;border-radius:6px;cursor:pointer;font-size:12px}
     .mirror button:hover{background:var(--accent2)}
-    @media (max-width:880px){.wrap{grid-template-columns:1fr;padding:6px;gap:8px}.console{order:2; max-width: 98vw;}}
-    @media (max-width:420px){h1{font-size:1.3rem}.wrap{padding:0}.stage{padding:10px}.book-ornament{width:40px;height:40px;font-size:20px}}
-    /* SEARCH FORM */
-    .search-panel{background:rgba(255,255,255,0.9); border-radius:10px; box-shadow:0 2px 8px rgba(16,42,67,0.06); padding:12px; margin-bottom:5px; display:flex; flex-direction:column; gap:7px;}
-    .search-panel input[type="text"]{width:100%;padding:8px;font-size:1.1em;border-radius:7px; border:1px solid #cdd4db;}
-    .search-panel input:focus{outline:2px solid var(--accent2);}
-    .search-panel button{margin-top:5px;padding:10px; font-size:1.08em; border-radius:8px; background:var(--accent2); color:#fff; border:none; font-weight:700; cursor:pointer;}
-    .search-panel button:hover{background:#e94a66;}
-    .search-panel label{font-size:1em;}
+    .hidden { display: none !important; }
+    canvas.layer {position:absolute;inset:0;pointer-events:none}
   </style>
 </head>
 <body>
@@ -79,7 +153,7 @@
       </div>
     </main>
     <aside class="console" role="region" aria-label="Console">
-      <h3 style="margin:0 0 8px 0;color:var(--accent); font-size:1.14em;">Controls</h3>
+      <h3 style="margin:0 0 8px 0;color:var(--accent); font-size:1.12em;">Controls</h3>
       <div class="search-panel">
         <label>Find a Bangla Audiobook:</label>
         <form id="extsearch" onsubmit="goSearch(this); return false;">
@@ -90,8 +164,14 @@
           <button type="submit">Search Audiobooks</button>
         </form>
       </div>
-         </aside>
+      <div class="controls">
+        <button class="btn" id="btnShowFire">Show Fireworks Now</button>
+        <button class="btn secondary" id="btnToggleConf">Toggle Confetti</button>
+        <button class="btn" id="btnPlayMel">Play Short Melody</button>
+        <label class="small"><input type="checkbox" id="autoConf" checked /> Auto-confetti</label>
       </div>
+    </aside>
+  </div>
   <div class="mirror" id="mirror">
     <canvas id="mirrorCanvas"></canvas>
     <button id="toggleEffect">Change Effect</button>
@@ -108,7 +188,107 @@
       window.open('https://banglaaudiobook.in/?s=' + terms, '_blank');
     }
 
-    // floating book emojis (visual effect)
+    // floating book emojis
+    function spawnBook(){
+      const b=document.createElement('div');
+      b.className='book';
+      b.textContent='📖';
+      b.style.left=Math.random()*100+'vw';
+      b.style.animationDuration=(8+Math.random()*6)+'s';
+      document.body.appendChild(b);
+      setTimeout(()=>b.remove(),15000);
+    }
+    setInterval(spawnBook,2000);
+
+    // --- FIREWORKS BUTTON FUNCTIONALITY ---
+    const fireworks = document.getElementById('fireworks');
+    function showFireworks(){
+      const ctx = fireworks.getContext('2d');
+      fireworks.width = fireworks.offsetWidth;
+      fireworks.height = fireworks.offsetHeight;
+      // Make a simple radial burst animation for demo
+      let t = 0, parts = [];
+      for(let i=0; i<16; ++i){
+        let a = (i/16)*2*Math.PI;
+        parts.push({
+          x:fireworks.width/2, y:fireworks.height/2, dx:Math.cos(a)*4, dy:Math.sin(a)*4, color:'hsl('+Math.floor(360*i/16)+',96%,64%)'
+        });
+      }
+      function draw(){
+        ctx.globalAlpha=0.18;ctx.fillStyle="#fff0fa";ctx.fillRect(0,0,fireworks.width,fireworks.height);ctx.globalAlpha=1;
+        for(let i=0;i<parts.length;++i){
+          let p=parts[i];
+          ctx.beginPath();ctx.arc(p.x,p.y,8,0,2*Math.PI);ctx.fillStyle=p.color;ctx.fill();
+          p.x+=p.dx;p.y+=p.dy;
+          p.dy+=0.15;
+        }
+        t++;
+        if(t<28) requestAnimationFrame(draw);
+        else setTimeout(()=>{ ctx.clearRect(0,0,fireworks.width,fireworks.height); }, 450);
+      }
+      draw();
+    }
+    document.getElementById('btnShowFire').onclick = showFireworks;
+
+    // --- CONFETTI FUNCTIONALITY ---
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    let confettiActive = true, confettiTimer, confettiShapes = [];
+    function startConfetti() {
+      confettiActive = true;
+      if (confettiTimer) return;
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+      confettiShapes = Array.from({length:38},()=>({
+        x:Math.random()*confettiCanvas.width, y:Math.random()*-confettiCanvas.height,
+        r:8+Math.random()*18, color:`hsl(${Math.random()*360},93%,83%)`,dy:2+Math.random()*2
+      }));
+      function draw(){
+        const ctx = confettiCanvas.getContext('2d');
+        ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+        for(const c of confettiShapes){
+          ctx.beginPath(); ctx.arc(c.x,c.y,c.r,0,2*Math.PI); ctx.fillStyle=c.color; ctx.fill();
+          c.y+=c.dy; if (c.y>confettiCanvas.height) c.y=-20-c.r;
+        }
+        if(confettiActive) confettiTimer = requestAnimationFrame(draw);
+        else {ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);}
+      }
+      draw();
+    }
+    function stopConfetti() {
+      confettiActive = false;
+      if (confettiTimer) cancelAnimationFrame(confettiTimer);
+      const ctx = confettiCanvas.getContext('2d');
+      ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+      confettiTimer = null;
+    }
+    document.getElementById('btnToggleConf').onclick = () => {
+      confettiActive = !confettiActive;
+      if(confettiActive) startConfetti();
+      else stopConfetti();
+    };
+    document.getElementById('autoConf').onchange = function() {
+      if(this.checked) startConfetti(); else stopConfetti();
+    };
+    if(document.getElementById('autoConf').checked) startConfetti();
+
+    // SHORT MELODY BUTTON
+    document.getElementById('btnPlayMel').onclick = function(){
+      if(window.AudioContext){
+        let ctx = new window.AudioContext(), o=ctx.createOscillator(), g=ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        let melody=[261.6,392,329.6,392,293.7,392,261.6,392];
+        let t=ctx.currentTime;
+        for(let i=0; i<melody.length; ++i){
+          o.frequency.setValueAtTime(melody[i],t+0.17*i);
+        }
+        g.gain.setValueAtTime(0.12,t);
+        g.gain.linearRampToValueAtTime(0.12,t+melody.length*0.17);
+        g.gain.linearRampToValueAtTime(0,t+melody.length*0.17+0.25);
+        o.start(); o.stop(t+melody.length*0.17+0.4);
+      }
+    };
+
+    // floating book emojis
     function spawnBook(){
       const b=document.createElement('div');
       b.className='book';
@@ -122,7 +302,7 @@
 
     // funny mirror using webcam with many effects
     const mirrorCanvas=document.getElementById('mirrorCanvas');
-    const ctx=mirrorCanvas.getContext('2d');
+    const ctx_m=mirrorCanvas.getContext('2d');
     const video=document.createElement('video');
     video.autoplay=true;
     video.muted=true;
@@ -131,20 +311,20 @@
     const effects=[
       function wave(){
         for(let y=0;y<video.videoHeight;y+=10){
-          ctx.drawImage(video,0,y,video.videoWidth,10,Math.sin(y/20)*20,y,video.videoWidth,10);
+          ctx_m.drawImage(video,0,y,video.videoWidth,10,Math.sin(y/20)*20,y,video.videoWidth,10);
         }
       },
       function stretch(){
-        ctx.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width,mirrorCanvas.height*1.5);
+        ctx_m.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width,mirrorCanvas.height*1.5);
       },
       function squish(){
-        ctx.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width*0.5,mirrorCanvas.height);
+        ctx_m.drawImage(video,0,0,video.videoWidth,video.videoHeight,0,0,mirrorCanvas.width*0.5,mirrorCanvas.height);
       },
       function flip(){
-        ctx.save();
-        ctx.scale(-1,1);
-        ctx.drawImage(video,-mirrorCanvas.width,0,mirrorCanvas.width,mirrorCanvas.height);
-        ctx.restore();
+        ctx_m.save();
+        ctx_m.scale(-1,1);
+        ctx_m.drawImage(video,-mirrorCanvas.width,0,mirrorCanvas.width,mirrorCanvas.height);
+        ctx_m.restore();
       },
       function pixelate(){
         const size=10;
@@ -153,16 +333,16 @@
         temp.height=video.videoHeight/size;
         const tctx=temp.getContext('2d');
         tctx.drawImage(video,0,0,temp.width,temp.height);
-        ctx.imageSmoothingEnabled=false;
-        ctx.drawImage(temp,0,0,temp.width,temp.height,0,0,mirrorCanvas.width,mirrorCanvas.height);
-        ctx.imageSmoothingEnabled=true;
+        ctx_m.imageSmoothingEnabled=false;
+        ctx_m.drawImage(temp,0,0,temp.width,temp.height,0,0,mirrorCanvas.width,mirrorCanvas.height);
+        ctx_m.imageSmoothingEnabled=true;
       }
     ];
     function drawFunny(){
       if(video.readyState===video.HAVE_ENOUGH_DATA){
         mirrorCanvas.width=video.videoWidth;
         mirrorCanvas.height=video.videoHeight;
-        ctx.clearRect(0,0,mirrorCanvas.width,mirrorCanvas.height);
+        ctx_m.clearRect(0,0,mirrorCanvas.width,mirrorCanvas.height);
         effects[effectIndex % effects.length]();
       }
       requestAnimationFrame(drawFunny);
